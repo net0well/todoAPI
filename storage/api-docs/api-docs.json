@@ -1,0 +1,188 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Todo API",
+        "description": "Documentação da API de tarefas",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Lista todas as tarefas",
+                "operationId": "49e73b9da657e3e2dac88d10e4ffaa4b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas"
+                    }
+                }
+            }
+        },
+        "/api/store": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Cria uma nova tarefa",
+                "operationId": "37f2804f0d0f9a6cde78d223606ee3e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tarefa criada com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Exibe uma tarefa específica",
+                "operationId": "a77814090bb1e131e2631e5bae8d49a7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados da tarefa"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Atualiza uma tarefa",
+                "operationId": "9ccc40d8bbefe28e7edf676671d75ec3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tarefa atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Remove uma tarefa",
+                "operationId": "bcdf6dcfa53bcacbab96196e44c4ec78",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarefa removida com sucesso"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            }
+        },
+        "/api/tasks/completed/{id}": {
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Marca uma tarefa como concluída",
+                "operationId": "d0601f3c62703285cba10b29719ac963",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tarefa marcada como concluída"
+                    },
+                    "404": {
+                        "description": "Tarefa não encontrada"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Tasks",
+            "description": "Tasks"
+        }
+    ]
+}
