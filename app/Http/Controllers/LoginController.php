@@ -24,14 +24,8 @@ class LoginController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        $expiresAt = now()->addMinutes(1);
-        $tokenResult = $user->createToken('api-token');
-        $user->tokens()->latest()->first()->update(['expires_at' => $expiresAt]);
-
         return response()->json([
-            'user'       => $user,
-            'token'      => $tokenResult->plainTextToken,
-            'expires_at' => $expiresAt->toDateTimeString(),
+            'user'       => $user
         ], 201);
     }
 
