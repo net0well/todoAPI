@@ -20,3 +20,9 @@ Route::get('tasks/{id}', [App\Http\Controllers\TasksController::class, 'show']);
 Route::put('tasks/{id}', [App\Http\Controllers\TasksController::class, 'update']);
 Route::delete('tasks/{id}', [App\Http\Controllers\TasksController::class, 'destroy']);
 Route::put('tasks/completed/{id}', [App\Http\Controllers\TasksController::class, 'completeTask']);
+
+
+/* Rotas de Testes */
+
+Route::post('QRCode', [App\Http\Controllers\QrCodeController::class, 'generateQrCode']);
+Route::post('QRCodeImg', [App\Http\Controllers\QrCodeController::class, 'generateQrCodeImage']);

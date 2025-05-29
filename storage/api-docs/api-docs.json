@@ -6,6 +6,84 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/QRCode": {
+            "post": {
+                "tags": [
+                    "QRCode"
+                ],
+                "summary": "Gera um QR Code a partir de um texto e retorna como SVG",
+                "operationId": "2996d361637c9675fb7265ab9efea387",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "string",
+                                        "example": "Texto para o QR Code"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "QR Code gerado com sucesso",
+                        "content": {
+                            "image/svg+xml": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/QRCodeImg": {
+            "post": {
+                "tags": [
+                    "QRCode"
+                ],
+                "summary": "Gera um QR Code a partir de um texto e retorna como Imagem PNG",
+                "operationId": "8d30af0b227de15dfd403cd4fcf89fc6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "string",
+                                        "example": "Texto para o QR Code"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "QR Code gerado com sucesso",
+                        "content": {
+                            "image/png": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
         "/api/tasks": {
             "get": {
                 "tags": [
@@ -172,6 +250,9 @@
                     "200": {
                         "description": "Tarefa marcada como concluída"
                     },
+                    "400": {
+                        "description": "Tarefa já está concluída"
+                    },
                     "404": {
                         "description": "Tarefa não encontrada"
                     }
@@ -180,6 +261,10 @@
         }
     },
     "tags": [
+        {
+            "name": "QRCode",
+            "description": "QRCode"
+        },
         {
             "name": "Tasks",
             "description": "Tasks"
