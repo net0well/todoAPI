@@ -86,4 +86,5 @@ class QrCodeController extends Controller
     return response($result->getString(), 200)
         ->header('Content-Type', 'image/png');
     }
+
 }

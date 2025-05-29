@@ -14,15 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('tasks', [App\Http\Controllers\TasksController::class, 'index']);
-Route::post('store', [App\Http\Controllers\TasksController::class, 'store']);
-Route::get('tasks/{id}', [App\Http\Controllers\TasksController::class, 'show']);
-Route::put('tasks/{id}', [App\Http\Controllers\TasksController::class, 'update']);
-Route::delete('tasks/{id}', [App\Http\Controllers\TasksController::class, 'destroy']);
-Route::put('tasks/completed/{id}', [App\Http\Controllers\TasksController::class, 'completeTask']);
+Route::middleware('auth:sanctum')->get('tasks', [App\Http\Controllers\TasksController::class, 'index']);
+Route::middleware('auth:sanctum')->post('store', [App\Http\Controllers\TasksController::class, 'store']);
+Route::middleware('auth:sanctum')->get('tasks/{id}', [App\Http\Controllers\TasksController::class, 'show']);
+Route::middleware('auth:sanctum')->put('tasks/{id}', [App\Http\Controllers\TasksController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('tasks/{id}', [App\Http\Controllers\TasksController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('tasks/completed/{id}', [App\Http\Controllers\TasksController::class, 'completeTask']);
 
 
 /* Rotas de Testes */
+Route::middleware('auth:sanctum')->post('QRCode', [App\Http\Controllers\QrCodeController::class, 'generateQrCode']);
+Route::middleware('auth:sanctum')->post('QRCodeImg', [App\Http\Controllers\QrCodeController::class, 'generateQrCodeImage']);
 
-Route::post('QRCode', [App\Http\Controllers\QrCodeController::class, 'generateQrCode']);
-Route::post('QRCodeImg', [App\Http\Controllers\QrCodeController::class, 'generateQrCodeImage']);
+/* Rota para fazer testar requisição http */
+Route::middleware('auth:sanctum')->get('ip', [App\Http\Controllers\IpController::class, 'getIp']);
+
+/* Login */
+Route::post('register', [App\Http\Controllers\LoginController::class, 'register']);
+Route::post('login', [App\Http\Controllers\LoginController::class, 'login']);
+
+Route::middleware('auth:sanctum')->get('users', [App\Http\Controllers\LoginController::class, 'getUsers']);
